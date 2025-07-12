@@ -54,7 +54,7 @@ export default function Index() {
 
                 {trendingMovies && (
                   <View className="mt-10">
-                    <Text className="tex-lg text-white font-bold mb-3 ">Trending Movies</Text>
+                    <Text className="text-lg text-white fo nt-bold mb-3">Trending Movies</Text>
                   </View>
                 )}
                  <>

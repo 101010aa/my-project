@@ -1,6 +1,8 @@
 import { icons } from '@/constants/icons';
 import { fetchMoviesDetails } from '@/services/api';
 import useFetch from '@/services/useFetch';
+import { useSavedMovies } from '@/store/SavedMovies';
+
 import { router, useLocalSearchParams } from 'expo-router';
 import React from 'react';
 import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native';
@@ -26,6 +28,13 @@ const MovieDetails = () => {
 
     const { data: movie, loading } = useFetch(() =>
     fetchMoviesDetails(id as string));
+
+   const { toggleSave, isSaved } = useSavedMovies();
+
+  const handleSaveToggle = () => {
+    if (movie) toggleSave(movie);
+  };
+
   return (
     <View className="bg-primary flex-1">
       <ScrollView contentContainerStyle={{
@@ -38,8 +47,18 @@ const MovieDetails = () => {
 
         <View className="flex-col items-start justify-center
         mt-5 px-5">
-            <Text className="text-white font-bold text-xl">
-              {movie?.title}</Text>
+         <View className="flex-row items-center">
+            <Text className="text-white font-bold text-xl flex-1">
+               {movie?.title}
+             </Text>
+                <TouchableOpacity onPress={handleSaveToggle}>
+              <Image
+                source={movie && isSaved(movie.id) ? icons.saveFilled : icons.save}
+                className="size-8"
+              />
+            </TouchableOpacity>
+               </View>
+
               <View className="flex-row items-center gap-x-1
               mt-2">
                      <Text className="text-light-200
