@@ -22,7 +22,6 @@ const Saved = () => {
 
   return (
     <SafeAreaView className="bg-primary flex-1 px-5 pt-11">
-      {/* Fix typo: fo nt-bold -> font-bold */}
       <Text className="text-lg text-white font-bold mb-6">
         Saved Movies
       </Text>
